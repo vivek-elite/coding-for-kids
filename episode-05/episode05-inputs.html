@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Episode 5 - Inputs</title>
+        <style>
+            body {
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                background-image: url('pizza-sm.png');
+                color:darkslategrey;
+                text-align: center;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            input,select {
+                font-size: 1em;
+            }
+            #quantity {
+                width: 40px;
+            }
+            #submit {
+                background-color: aqua;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>HTML Inputs</h1>
+        <h3>Customer details</h3>
+        Name <input type="text" id="customerName">
+        Mobile <input type="text" id="mobile">
+        Email <input type="text" id="email">
+        <h3>Pizza type</h3>
+        <select id="pizzaType">
+            <option value="Cheese">Cheese</option>
+            <option value="Chilly Paneer">Chilly Paneer</option>
+            <option value="Farmhouse">Farmhouse</option>
+            <option value="Mushroom">Mushroom</option>
+        </select>
+        <h3>Extra toppings</h3>
+        <input type="checkbox" name="Olives" value="Olives"> Olives
+        <input type="checkbox" name="Jalapeno" value="Jalapeno"> Jalapeno
+        <input type="checkbox" name="Cheese" value="Cheese"> Cheese <br>
+        <h3>No. of pizzas</h3>
+        <input type="number" id="quantity" value="1"><br>
+        <h3>Payment mode</h3>
+        <input type="radio" name="pymtMode" value="Cash"> Cash
+        <input type="radio" name="pymtMode" value="PayTm"> PayTm
+        <hr>
+        <input type="submit" id="submit" value="Calculate">
+    </body>
+</html>

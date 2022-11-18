@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            body {
+                text-align: center;
+            }
+            #board {
+                background: url('background.jpg');
+                /* background: url('https://atjammu.com/edupro/codefiles/coding-for-kids/background.jpg'); */
+                background-size: cover;
+                border: 1px solid black;
+                height: 350px;
+                width: 650px;
+                margin: 10px auto;
+            }
+            .character {
+                background: url('guest.jpg');
+                /* background: url('https://atjammu.com/edupro/codefiles/coding-for-kids/guest.jpg'); */
+                background-size: cover;
+                width: 120px;
+                height: 120px;
+                padding: 10px;
+                margin: 10px;
+                float: left;
+                display: none;
+            }
+            .thief {
+                background: url('thief.jpg');
+                /* background: url('https://atjammu.com/edupro/codefiles/coding-for-kids/thief.jpg'); */
+                background-size: cover;
+            }
+            .hidden {
+                display: none;
+            }
+            .visible {
+                display: block;
+            }
+            #action {
+                /* width: 650px; */
+                text-align: center;
+                margin-top: 5px;
+             }             
+            .mybutton {
+                font-family:Verdana, Geneva, Tahoma, sans-serif;
+                font-size: 1.2em;
+                color: brown;
+                width: 200px;
+                background-color: lightpink;
+                padding: 5px;
+                border-radius: 8px;
+            } 
+        </style>
+    </head>
+    <body>
+        <div id="board">
+            <div class="character">1</div>      
+            <div class="character">2</div>      
+            <div class="character">3</div>
+            <div class="character">4</div>
+            <div class="character">5</div>
+            <div class="character">6</div>
+        </div>
+        <div id="action">
+            <input type="button" class="mybutton" value="Play" onclick="startGame()";/>
+        </div>
+
+        <script>
+            function startGame() {
+                gameLoop();
+            }
+
+            var loops = 0;
+            var peopleVisible = false;
+            var gameScore = 0;
+
+            function gameLoop() {
+                peopleVisible = !peopleVisible; // true > false > true
+                createCharacters();
+                loops++;
+                if(loops < 12) {
+                    setTimeout(gameLoop, peopleVisible ? 1000 : 3000);
+
+                    // if(peopleVisible===true) {
+                    //     setTimeout(gameLoop, 1000)
+                    // } else {
+                    //     setTimeout(gameLoop, 3000)
+                    // }
+                }
+                else {
+                    alert("You scored " + gameScore);
+                }
+            }
+
+            function createCharacters() {
+                var board = document.getElementById("board");
+                var classToSet = peopleVisible ? "character visible" : "character hidden";
+
+                // var classToSet;
+                // if(peopleVisible===true) {
+                //     classToSet = "character visible";
+                // } else {
+                //     classToSet = "character hidden";
+                // }
+
+                for(var index = 0; index < 6; index ++) {
+                    board.children[index].className = classToSet; 
+                    board.children[index].innerHTML = "";
+                    board.children[index].onclick = function() {
+                        gameScore += -2;
+                    }
+                }
+                var randomNumber = Math.floor(Math.random() * 6) + 1;   // 0 - 1 > 0.4 * 6 = Math.floor(2.4) + 1 > 3 
+
+                board.children[randomNumber-1].innerHTML = "";  
+                board.children[randomNumber-1].onclick = function() {
+                    gameScore++;
+                }
+                board.children[randomNumber-1].className = classToSet + " thief"; 
+            }            
+        </script>
+    </body>
+</html>

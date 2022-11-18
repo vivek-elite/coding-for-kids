@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>JS Toy Train</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+            }
+            #container {
+                padding: 10px;
+                width: 1200px;
+                height: 80%;
+                background-color: burlywood;
+                /* margin: auto; */
+            }
+            #track {
+                width: 1180px;
+                border-top: 2px solid white;
+                border-bottom: 2px solid white;
+                margin: 20px auto;
+            }
+            #train {
+                height: 92px;
+                width: 100px;
+                position: relative;
+                left: 0px;
+            }
+            #stopButton {
+                padding-top: 15px;
+                margin: 10px auto;
+                background-color: red;
+                width: 100px;
+                height: 50px;
+                color: white;
+                text-align:center;
+                font-size: 24px;
+                line-height: 30px;
+            }            
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <p>
+                <ul>
+                    <li>Click the train to make it go faster.</li>
+                    <li>Click the Stop button to stop it.</li>
+                    <li>Try to stop it as close to the edge as possible, without crashing.</li>
+                </ul>
+            </p>
+            <div id="track">
+                <div id="train">
+                    <img src="train.png">
+                </div>
+            </div>
+            <div id="stopButton">Stop</div>
+        </div> 
+               
+        <script>
+            var trainSpeed = 250;
+            var trainPosition = 0;
+            var animation;
+
+            var train = document.getElementById("train");
+            train.addEventListener("click", speedUp);
+
+            var stopButton = document.getElementById("stopButton");
+            stopButton.addEventListener("click", stopTrain);
+
+            function speedUp() {
+                if (trainSpeed > 50) {  // if (250 > 50) {
+                    trainSpeed -= 50;   // trainSpeed = 250 - 50 = 200
+                }
+                console.log("train speed: " + trainSpeed);
+
+                clearInterval(animation);
+                animation = setInterval(frame, trainSpeed);   // frame >  function, trainSpeed > interval
+
+                function frame() {
+                    trainPosition += 2;     // trainPosition = trainPosition + 2  = 2;
+                    train.style.left = trainPosition + 'px';
+                    console.log(trainPosition);
+                    checkPosition(trainPosition);
+                }
+            }
+
+            function checkPosition(currentPosition) {
+                if (currentPosition > 1100) {
+                    alert("Crash!");
+                    console.log("Crash!");
+                    clearInterval(animation);
+                }
+            }
+
+            function stopTrain() {
+                clearInterval(animation);
+                if(trainPosition > 900) {
+                    alert("Whew! That was close!");
+                    console.log("Whew! That was close!");
+                }
+            }        
+        </script>        
+    </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <style>
+            h1 {
+                background-color:aqua;
+                text-align:center; 
+                padding: 20px; 
+                font-family: Verdana;                
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Student Activity Club</h1>
+        <div style="background-color:#98FB98; padding: 20px; font-family: Verdana;">
+          <p><strong>Group Activity To-Do List</strong></p>
+          <input type="text" id="box" placeholder="Type here to add task"/>
+          <br/>
+          <input type="button" value="Add Task" onclick="addItem();"/>
+          <br/>
+          <div id="list">
+            
+          </div>
+        </div>
+        <script>
+            function addItem() {
+                var newItem = document.createElement("div");
+                newItem.innerHTML = document.getElementById("box").value;
+                newItem.onclick = removeItem;
+                document.getElementById("list").appendChild(newItem);
+                saveList();
+            }
+            function removeItem() {
+                document.getElementById("list").removeChild(this);
+                saveList();
+            }
+            function saveList() {
+                localStorage.storedList = document.getElementById("list").innerHTML;
+            }
+            function loadList() {
+                document.getElementById("list").innerHTML = localStorage.storedList;
+                for(var i = 0; i < list.children.length; i++) {
+                    list.children[i].onclick = removeItem;
+                }
+            }
+
+            if(localStorage.storedList) {
+                loadList();
+            }
+        </script>
+    </body>
+</html>
